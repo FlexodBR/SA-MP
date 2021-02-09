@@ -642,6 +642,7 @@ void CLocalPlayer::SendOnFootFullSyncData()
 	
 	ofSync.byteCurrentWeapon = m_pPlayerPed->GetCurrentWeapon();
 	ofSync.byteSpecialAction = GetSpecialAction();
+	ofSync.iAnimationIndex = GetAnimIndex();
 		
 	ofSync.vecMoveSpeed = vecMoveSpeed;
 

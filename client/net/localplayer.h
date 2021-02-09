@@ -75,6 +75,8 @@ private:
 	DWORD					m_dwLastStatsUpdateTick;
 	DWORD					m_dwLastHeadUpdate;
 
+	int						iAnimIndex;
+
 	struct
 	{
 		VEHICLEID MonitoredVehicleID;
@@ -163,6 +165,9 @@ public:
 	bool IsInRCMode() { return m_bInRCMode; };
 
 	int DetermineNumberOfPlayersInLocalRange();
+	
+	void SetAnimIndex(int iIndex) { iAnimIndex = iIndex; };
+	int GetAnimIndex() { return iAnimIndex; };
 };
 
 //----------------------------------------------------------

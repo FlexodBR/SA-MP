@@ -1295,6 +1295,17 @@ void ScrApplyAnimation(RPCParameters *rpcParams)
 	if(pPlayerPool) {
 		// Get the CPlayerPed for this player
 		if(bytePlayerID == pPlayerPool->GetLocalPlayerID()) {
+			char szAnimIndex[32];
+			strcpy_s(szAnimIndex, szAnimLib);
+			strcat_s(szAnimIndex, ":");
+			strcat_s(szAnimIndex, szAnimName);
+
+			for (int i = 0; i < 1812; i++) {
+				if (!strcmp(szAnimIndex, g_szAnimNames[i])) {
+					pPlayerPool->GetLocalPlayer()->SetAnimIndex(i);
+				}
+			}
+			
 			pPlayerPed = pPlayerPool->GetLocalPlayer()->GetPlayerPed();
 		}
 		else {
@@ -1329,6 +1340,7 @@ void ScrClearAnimations(RPCParameters *rpcParams)
 	if(pPlayerPool) {
 		// Get the CPlayerPed for this player
 		if(bytePlayerID == pPlayerPool->GetLocalPlayerID()) {
+			pPlayerPool->GetLocalPlayer()->SetAnimIndex(NULL);
 			pPlayerPed = pPlayerPool->GetLocalPlayer()->GetPlayerPed();
 		}
 		else {

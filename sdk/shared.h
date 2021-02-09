@@ -255,6 +255,7 @@ typedef struct {
 	unsigned char byteArmour;
 	unsigned char byteCurrentWeapon;
 	unsigned char byteSpecialAction;
+	int iAnimationIndex;
 	VECTOR vecMoveSpeed;
 	VECTOR vecSurfOffsets;
 	VEHICLEID SurfVehicleId;

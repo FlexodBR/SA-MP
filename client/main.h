@@ -34,6 +34,9 @@
 // Shared stuffs
 #include "shared.h"
 
+// Animations
+#include "animations.h"
+
 // BASS
 #include "bass/bass.h"
 

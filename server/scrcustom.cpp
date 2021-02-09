@@ -4635,6 +4635,53 @@ static cell n_ClearAnimations(AMX *amx, cell *params)
 	return 1;
 }
 
+//----------------------------------------------------------------------------------
+// native GetPlayerAnimationIndex(playerid)
+
+static cell n_GetPlayerAnimationIndex(AMX *amx, cell *params)
+{
+	CHECK_PARAMS(amx, "GetPlayerAnimationIndex", 1);
+
+	if (pNetGame->GetPlayerPool() &&
+		pNetGame->GetPlayerPool()->GetSlotState(params[1]))
+	{
+		CPlayer* pPlayer = pNetGame->GetPlayerPool()->GetAt(params[1]);
+
+		if (pPlayer && pPlayer->GetState() == PLAYER_STATE_ONFOOT) {
+			return pPlayer->GetOnFootSyncData()->iAnimationIndex;
+		}
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------------------------
+// native GetAnimationName(index, animlib[], len1, animname[], len2)
+
+static cell n_GetAnimationName(AMX *amx, cell *params)
+{
+	CHECK_PARAMS(amx, "GetAnimationName", 5);
+
+	CPlayerPool *pPlayerPool = pNetGame->GetPlayerPool();
+	char* szAnimFull = pPlayerPool->GetAnimNameByIndex(params[1]);
+	char* szAnimDelimiter;
+	char szAnimLib[32];
+	char szAnimName[32];
+
+	if (!szAnimFull) return 0;
+
+	szAnimDelimiter = strchr(szAnimFull, ':');
+
+	if (!szAnimDelimiter) return 0;
+
+	strncpy_s(szAnimLib, szAnimFull, (size_t)(szAnimDelimiter - szAnimFull));
+	strcpy_s(szAnimName, ++szAnimDelimiter);
+
+	set_amxstring(amx, params[2], szAnimLib, params[3]);
+	set_amxstring(amx, params[4], szAnimName, params[5]);
+
+	return 1;
+}
 
 //----------------------------------------------------------------------------------
 // native AllowPlayerTeleport(playerid, allow)
@@ -7672,6 +7719,8 @@ AMX_NATIVE_INFO custom_Natives[] =
 	{ "PlayerSpectatePlayer",	n_PlayerSpectatePlayer },
 	{ "ApplyAnimation",			n_ApplyAnimation },
 	{ "ClearAnimations",		n_ClearAnimations },
+	DEFINE_NATIVE(GetAnimationName),
+	DEFINE_NATIVE(GetPlayerAnimationIndex),
 	{ "SetPlayerSpecialAction", n_SetPlayerSpecialAction },
 	{ "GetPlayerSpecialAction", n_GetPlayerSpecialAction },
 	DEFINE_NATIVE(GetPlayerDrunkLevel),

@@ -111,6 +111,11 @@ public:
 
 	void DeactivateAll();
 	int GetLastPlayerId() const { return m_iLastPlayerId; }
+	
+	char* GetAnimNameByIndex(int iIndex) {
+		if (iIndex > 1812 || iIndex < 1) return (char*)0;
+		return (char*)g_szAnimNames[iIndex];
+	};
 };
 
 //----------------------------------------------------

@@ -158,6 +158,8 @@ native TogglePlayerControllable(playerid, toggle);
 native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
 native ApplyAnimation(playerid, const animlib[], const animname[], Float:speed, loop, lockx, locky, lockf, time);
 native ClearAnimations(playerid);
+native GetPlayerAnimationIndex(playerid);
+native GetAnimationName(index, animlib[], len1, animname[], len2);
 native GetPlayerSpecialAction(playerid);
 native SetPlayerSpecialAction(playerid, actionid);
 native CreatePlayerPickup(pickupid, playerid, modelid, typeid, Float:x, Float:y, Float:z);

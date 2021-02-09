@@ -110,6 +110,9 @@ typedef struct _SERVER_SETTINGS {
 // Shared stuffs
 #include "shared.h"
 
+// Animations
+#include "animations.h"
+
 // SA:MP
 #include "variable.h"
 #include "system.h"
