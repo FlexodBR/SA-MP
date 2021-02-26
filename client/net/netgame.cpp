@@ -60,6 +60,7 @@ CNetGame::CNetGame(PCHAR szHostOrIp, int iPort,
 	m_pObjectPool	= new CObjectPool();
 	m_pMenuPool = new CMenuPool();
 	m_pTextDrawPool = new CTextDrawPool();
+	m_pTextDrawSelect = new CTextDrawSelect();
 	m_pGangZonePool = new CGangZonePool();
 	m_pActorPool = new CActorPool();
 
@@ -125,6 +126,7 @@ CNetGame::~CNetGame()
 	SAFE_DELETE(m_pObjectPool);
 	SAFE_DELETE(m_pMenuPool);
 	SAFE_DELETE(m_pTextDrawPool);
+	SAFE_DELETE(m_pTextDrawSelect);
 	SAFE_DELETE(m_pGangZonePool);
 	SAFE_DELETE(m_pActorPool);
 }
@@ -174,6 +176,7 @@ void CNetGame::ShutdownForGameModeRestart()
 	ResetObjectPool();
 	ResetMenuPool();
 	ResetTextDrawPool();
+	ResetTextDrawSelectPool();
 	ResetGangZonePool();
 	ResetActorPool();
 
@@ -835,6 +838,16 @@ void CNetGame::ResetTextDrawPool()
 		delete m_pTextDrawPool;
 	}
 	m_pTextDrawPool = new CTextDrawPool();
+}
+
+//----------------------------------------------------
+
+void CNetGame::ResetTextDrawSelectPool()
+{
+	if (m_pTextDrawSelect)
+		delete m_pTextDrawSelect;
+
+	m_pTextDrawSelect = new CTextDrawSelect();
 }
 
 //----------------------------------------------------

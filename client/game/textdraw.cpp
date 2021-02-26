@@ -32,6 +32,7 @@ CTextDraw::CTextDraw(TEXT_DRAW_TRANSMIT *TextDrawTransmit, PCHAR szText)
 	m_TextDrawData.byteOutline = TextDrawTransmit->byteOutline;
 	m_TextDrawData.byteAlignLeft = TextDrawTransmit->byteLeft;
 	m_TextDrawData.byteAlignRight = TextDrawTransmit->byteRight;
+	m_TextDrawData.byteSelectable = TextDrawTransmit->byteSelectable;
 	m_TextDrawData.dwStyle = TextDrawTransmit->byteStyle;
 	m_TextDrawData.fX = TextDrawTransmit->fX;
 	m_TextDrawData.fY = TextDrawTransmit->fY;
@@ -68,7 +69,10 @@ void CTextDraw::Draw()
 	float fScaleX = (float)iScreenWidth * fHorizHudScale * m_TextDrawData.fLetterWidth;
 
 	Font_SetScale(fScaleX,fScaleY);
-	Font_SetColor(m_TextDrawData.dwLetterColor);
+	if(m_bSelect)
+		Font_SetColor(m_dwSelectColor);
+	else
+		Font_SetColor(m_TextDrawData.dwLetterColor);
     Font_Unk12(0);
 
 	if(m_TextDrawData.byteAlignRight) Font_SetJustify(2);
@@ -110,4 +114,25 @@ void CTextDraw::Draw()
     
     Font_PrintString(fUseX,fUseY,m_szString);
 	Font_SetOutline(0);
+	
+	if (m_TextDrawData.byteAlignRight)
+	{
+		m_rArea.left = (LONG)(fUseX - (fLineWidth - fUseX));
+		m_rArea.top = (LONG)fUseX;
+		m_rArea.bottom = (LONG)(fUseY + fLineHeight);
+	}
+	else if (m_TextDrawData.byteCentered)
+	{
+		m_rArea.left = (LONG)(fUseX - fLineHeight * 0.5);
+		m_rArea.top = (m_rArea.left + (LONG)fLineHeight);
+		m_rArea.bottom = (LONG)(fUseY + fLineWidth);
+	}
+	else
+	{
+		m_rArea.left = (LONG)fUseX;
+		m_rArea.top = (LONG)(fLineWidth - (fUseX + fUseX));
+		m_rArea.bottom = (LONG)(fUseY + fLineHeight);
+	}
+
+	m_rArea.right = (LONG)fUseY;
 }

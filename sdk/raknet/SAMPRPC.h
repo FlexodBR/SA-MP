@@ -59,6 +59,7 @@ enum
 	RPC_WorldAddActor,
 	RPC_WorldRemoveActor,
 	RPC_ActorDamage,
+	RPC_ClickTextDraw,
 
 	RPC_ScrSetSpawnInfo = 100,
 	RPC_ScrSetPlayerTeam,
@@ -149,6 +150,7 @@ enum
 	RPC_ScrSetActorHealth,
 	RPC_ScrApplyActorAnimation,
 	RPC_ScrClearActorAnimation,
+	RPC_ScrSelectTextDraw,
 
 	MAX_RPC_UNIQUE_ID, // Don't use it, and leave it as last constant
 };

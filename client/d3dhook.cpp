@@ -323,6 +323,9 @@ HRESULT __stdcall IDirect3DDevice9Hook::Present(CONST RECT* pSourceRect, CONST R
 
 	if (pAudioStream) pAudioStream->Process();
 
+	if (pNetGame && pNetGame->GetTextDrawSelectPool())
+		pNetGame->GetTextDrawSelectPool()->Process();
+
 	DoCheatDataStoring();
 
 	return pD3DDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);

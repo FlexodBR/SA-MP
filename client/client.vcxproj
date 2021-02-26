@@ -451,6 +451,7 @@
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BrowseInformation>
     </ClCompile>
     <ClCompile Include="net\textdrawpool.cpp" />
+	<ClCompile Include="net\textdrawselect.cpp" />
     <ClCompile Include="net\vehiclepool.cpp">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;_WINDOWS</PreprocessorDefinitions>
@@ -638,6 +639,7 @@
     <ClInclude Include="net\remoteplayer.h" />
     <ClInclude Include="net\scriptrpc.h" />
     <ClInclude Include="net\textdrawpool.h" />
+	<ClInclude Include="net\textdrawselect.h" />
     <ClInclude Include="net\vehiclepool.h" />
     <ClInclude Include="outputdebugstring.h" />
     <ClInclude Include="playertags.h" />

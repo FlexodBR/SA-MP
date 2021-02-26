@@ -66,6 +66,9 @@
     <ClCompile Include="net\textdrawpool.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="net\textdrawselect.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
     <ClCompile Include="net\vehiclepool.cpp">
       <Filter>net</Filter>
     </ClCompile>
@@ -368,6 +371,9 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="net\textdrawpool.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\textdrawselect.h">
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="net\vehiclepool.h">

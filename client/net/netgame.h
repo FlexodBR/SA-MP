@@ -49,6 +49,7 @@ public:
 	CObjectPool			*m_pObjectPool;
 	CMenuPool			*m_pMenuPool;
 	CTextDrawPool		*m_pTextDrawPool;
+	CTextDrawSelect		*m_pTextDrawSelect;
 	CGangZonePool		*m_pGangZonePool;
 	CPlayerPool			*m_pPlayerPool;
 	CPickupPool			*m_pPickupPool;
@@ -99,6 +100,7 @@ public:
 	CObjectPool	* GetObjectPool() { return m_pObjectPool; };
 	CMenuPool * GetMenuPool() { return m_pMenuPool; };
 	CTextDrawPool * GetTextDrawPool() { return m_pTextDrawPool; };
+	CTextDrawSelect * GetTextDrawSelectPool() { return m_pTextDrawSelect; };
 	CGangZonePool * GetGangZonePool() { return m_pGangZonePool; };
 	CActorPool * GetActorPool() { return m_pActorPool; };
 	RakClientInterface * GetRakClient() { return m_pRakClient; };
@@ -119,6 +121,7 @@ public:
 	void ResetObjectPool();
 	void ResetMenuPool();
 	void ResetTextDrawPool();
+	void ResetTextDrawSelectPool();
 	void ResetGangZonePool();
 	void ResetActorPool();
 	void ShutdownForGameModeRestart();

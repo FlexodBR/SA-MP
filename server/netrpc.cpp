@@ -916,6 +916,36 @@ static void ActorDamage(RPCParameters* rpcParams)
 
 //----------------------------------------------------
 
+static void ClickTextDraw(RPCParameters* rpcParams)
+{
+	int iTextDrawID;
+
+	if (rpcParams->numberOfBitsOfData == 32)
+	{
+		RakNet::BitStream bsData(rpcParams);
+
+		bsData.Read(iTextDrawID);
+		
+		CPlayer* pPlayer = pNetGame->GetPlayerPool()->GetAt(rpcParams->senderId);
+
+		if (pPlayer && pNetGame->GetTextDrawPool()->GetSlotState(iTextDrawID)) {
+			if (pNetGame->GetFilterScripts())
+				pNetGame->GetFilterScripts()->OnPlayerClickTextDraw(rpcParams->senderId, iTextDrawID);
+			if (pNetGame->GetGameMode())
+				pNetGame->GetGameMode()->OnPlayerClickTextDraw(rpcParams->senderId, iTextDrawID);
+		}
+		else if (pPlayer && pPlayer->m_pTextDraw->IsValid(iTextDrawID))
+		{
+			if (pNetGame->GetFilterScripts())
+				pNetGame->GetFilterScripts()->OnPlayerClickPlayerTextDraw(rpcParams->senderId, iTextDrawID);
+			if (pNetGame->GetGameMode())
+				pNetGame->GetGameMode()->OnPlayerClickPlayerTextDraw(rpcParams->senderId, iTextDrawID);
+		}
+	}
+}
+
+//----------------------------------------------------
+
 void RegisterRPCs(RakServerInterface * pRakServer)
 {
 	pRak = pRakServer;
@@ -943,6 +973,7 @@ void RegisterRPCs(RakServerInterface * pRakServer)
 	REGISTER_STATIC_RPC(pRakServer, ClientCheck);
 	REGISTER_STATIC_RPC(pRakServer, VehicleDamage);
 	REGISTER_STATIC_RPC(pRakServer, ActorDamage);
+	REGISTER_STATIC_RPC(pRakServer, ClickTextDraw);
 }
 
 //----------------------------------------------------

@@ -1197,6 +1197,26 @@ void ScrEditTextDraw(RPCParameters *rpcParams)
 	}
 }
 
+void ScrSelectTextDraw(RPCParameters* rpcParams)
+{
+	RakNet::BitStream bsData(rpcParams);
+	CTextDrawSelect* pTextDrawSelectPool = pNetGame->GetTextDrawSelectPool();
+
+	if (pTextDrawSelectPool)
+	{
+		DWORD dwColor;
+		if (bsData.ReadBit())  
+		{
+			bsData.Read(dwColor);
+
+			pTextDrawSelectPool->Enable(dwColor);
+		}
+		else if (!bsData.ReadBit()) {
+			pTextDrawSelectPool->Disable();
+		}
+	}
+}
+
 void ScrAddGangZone(RPCParameters *rpcParams)
 {
 	RakNet::BitStream bsData(rpcParams);
@@ -1976,6 +1996,7 @@ void RegisterScriptRPCs(RakClientInterface* pRakClient)
 	REGISTER_STATIC_RPC(pRakClient, ScrShowTextDraw);
 	REGISTER_STATIC_RPC(pRakClient, ScrHideTextDraw);
 	REGISTER_STATIC_RPC(pRakClient, ScrEditTextDraw);
+	REGISTER_STATIC_RPC(pRakClient, ScrSelectTextDraw);
 	REGISTER_STATIC_RPC(pRakClient, ScrAddGangZone);
 	REGISTER_STATIC_RPC(pRakClient, ScrRemoveGangZone);
 	REGISTER_STATIC_RPC(pRakClient, ScrFlashGangZone);
