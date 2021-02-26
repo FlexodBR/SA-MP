@@ -150,6 +150,7 @@ enum
 	RPC_ScrSetActorHealth,
 	RPC_ScrApplyActorAnimation,
 	RPC_ScrClearActorAnimation,
+	RPC_ScrDisableVehicleCollision,
 	RPC_ScrSelectTextDraw,
 
 	MAX_RPC_UNIQUE_ID, // Don't use it, and leave it as last constant
